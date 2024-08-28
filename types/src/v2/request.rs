@@ -68,7 +68,6 @@ impl From<Params> for Value {
 
 /// Represents JSON-RPC 2.0 request which is a method call.
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 pub struct MethodCall {
     /// A String specifying the version of the JSON-RPC protocol.
     pub jsonrpc: Version,
@@ -113,7 +112,6 @@ impl MethodCall {
 ///
 /// The Server MUST NOT reply to a Notification, including those that are within a batch request.
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 pub struct Notification {
     /// A String specifying the version of the JSON-RPC protocol.
     pub jsonrpc: Version,
@@ -148,7 +146,6 @@ impl Notification {
 
 /// Parameters of the subscription notification.
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 pub struct SubscriptionNotificationParams<T = Value> {
     /// Subscription id, as communicated during the subscription.
     pub subscription: Id,
@@ -168,7 +165,6 @@ impl<T: Serialize + DeserializeOwned> SubscriptionNotificationParams<T> {
 
 /// Server notification about something the client is subscribed to.
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 pub struct SubscriptionNotification<T = Value> {
     /// A String specifying the version of the JSON-RPC protocol.
     pub jsonrpc: Version,
@@ -198,7 +194,6 @@ impl<T: Serialize + DeserializeOwned> SubscriptionNotification<T> {
 
 /// Represents single JSON-RPC 2.0 call.
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 #[serde(untagged)]
 pub enum Call {
     /// Call method
@@ -254,7 +249,6 @@ impl From<Notification> for Call {
 
 /// JSON-RPC 2.0 Request object.
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 #[serde(untagged)]
 pub enum Request {
     /// Single call
@@ -272,7 +266,6 @@ impl fmt::Display for Request {
 
 /// JSON-RPC 2.0 Request object (only for method call).
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 #[serde(untagged)]
 pub enum MethodCallRequest {
     /// Single method call
